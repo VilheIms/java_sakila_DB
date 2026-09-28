@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import sakila_java_db.DatabaseConnection;
-import operations.DeleteOperation;
-import operations.InsertOperation;
+//import operations.DeleteOperation;
+//import operations.InsertOperation;
 import operations.SelectOperation;
-import operations.UpdateOperation;
+//import operations.UpdateOperation;
 import operations.ViewManager;
 
 public class SakilaDB {
@@ -45,7 +45,7 @@ public class SakilaDB {
 		}
 	}
 	
-	private static void tableMenu(String table, SelectOperation selectOp, InsertOperation insertOp, UpdateOperation updateOp, DeleteOperation deleteOp) {
+	private static void tableMenu(String table, SelectOperation selectOp /*, UpdateOperation updateOp, DeleteOperation deleteOp*/) {
 		boolean back = false;
 		while(!back) {
 			System.out.println("\n---" + table.toUpperCase() + "---\n"
@@ -62,11 +62,11 @@ public class SakilaDB {
 				selectOp.select(con, table);
 			}
 			
-			case "2": insertOp.insert(con, table);
+			/*case "2": insertOp.insert(con, table);
 			
 			case "3":  updateOp.update(con, table);
 			
-			case "4":  deleteOp.delete(con, table);
+			case "4":  deleteOp.delete(con, table);*/
 			
 			case "0":  back = true;
 			default: System.out.println();
@@ -81,7 +81,7 @@ public class SakilaDB {
 			
 			SelectOperation selectOp = new SelectOperation();
 			ViewManager viewManager = new ViewManager(con, selectOp, scan);
-			InsertOperation insertOp = new InsertOperation();
+			//InsertOperation insertOp = new InsertOperation();
 			UpdateOperation updateOp = new UpdateOperation();
 			DeleteOperation deleteOp = new DeleteOperation();
 			
@@ -100,7 +100,7 @@ public class SakilaDB {
 				case "1" ->{
 					String table = chooseTable();
 					if(!table.equals("exit")) {
-						tableMenu(table, selectOp, insertOp, updateOp, deleteOp);
+						tableMenu(table, selectOp /*, insertOp, updateOp, deleteOp*/);
 					}
 				}
 				
