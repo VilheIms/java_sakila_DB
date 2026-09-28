@@ -23,17 +23,19 @@ public class SakilaDB {
 	private static String chooseTable() {
 		while(true) {
 			System.out.println(CYAN + "\n--- TABULAS ---\n" + RESET
-					+ "1. City\n"
-					+ "2. Country\n"
-					+ "3. CountryLanguage\n"
+					+ "1. Address\n"
+					+ "2. Film\n"
+					+ "3. Category\n"
+					+ "4. Staff\n"
 					+ "0. Atpakal\n"
 					+ "Izvelies tabulu: ");
 			String c = scan.nextLine().trim();
 			
 			return switch(c) {
-			case "1" -> "city";
-			case "2" -> "country";
-			case "3" -> "countrylanguage";
+			case "1" -> "address";
+			case "2" -> "film";
+			case "3" -> "category";
+			case "4" -> "staff";
 			case "0" -> "exit";
 			default -> {
 				System.out.println("Nepareiza izvele.");
@@ -56,17 +58,18 @@ public class SakilaDB {
 			String c = scan.nextLine().trim();
 			
 			switch(c) {
-			case "1" -> 
-			selectOp.select(con, table);
+			case "1": {
+				selectOp.select(con, table);
+			}
 			
-			case "2" -> insertOp.insert(con, table);
+			case "2": insertOp.insert(con, table);
 			
-			case "3" -> updateOp.update(con, table);
+			case "3":  updateOp.update(con, table);
 			
-			case "4" -> deleteOp.delete(con, table);
+			case "4":  deleteOp.delete(con, table);
 			
-			case "0" -> back = true;
-			default -> System.out.println();
+			case "0":  back = true;
+			default: System.out.println();
 			}
 		}
 	}
@@ -74,7 +77,7 @@ public class SakilaDB {
 	public static void main(String[] args) {
 		try {
 			con = DatabaseConnection.getConnection();
-			System.out.println("Izveidots savienojums ar datu bazi World!");
+			System.out.println("Izveidots savienojums ar datu bazi Sakila!");
 			
 			SelectOperation selectOp = new SelectOperation();
 			ViewManager viewManager = new ViewManager(con, selectOp, scan);
@@ -85,7 +88,7 @@ public class SakilaDB {
 			boolean running = true;
 			
 			while(running) {
-				System.out.println(CYAN + "\n----- WORLD DB -----\n" + RESET
+				System.out.println(CYAN + "\n----- SAKILA DB -----\n" + RESET
 						+ GREEN +  "1. Tabulas \n" 
 						+ "2. Skati\n" + RESET
 						+ RED + "0. Apturet\n" + RESET
