@@ -40,7 +40,7 @@ public class SakilaDB {
 		}
 	}
 	
-	private static void tableMenu(String table, SelectOperation selectOp, InsertOperation insertOp /*, UpdateOperation updateOp*/, DeleteOperation deleteOp) {
+	private static void tableMenu(String table, SelectOperation selectOp, InsertOperation insertOp, UpdateOperation updateOp, DeleteOperation deleteOp) {
 		boolean back = false;
 		while(!back) {
 			System.out.println("\n---" + table.toUpperCase() + "---\n"
@@ -59,7 +59,7 @@ public class SakilaDB {
 			
 			case "2": insertOp.insert(con, table);
 			
-			//case "3":  updateOp.update(con, table);
+			case "3":  updateOp.update(con, table);
 			
 			case "4":  deleteOp.delete(con, table);
 			
@@ -95,7 +95,7 @@ public class SakilaDB {
 				case "1" ->{
 					String table = chooseTable();
 					if(!table.equals("exit")) {
-						tableMenu(table, selectOp , insertOp /*,  updateOp*/, deleteOp);
+						tableMenu(table, selectOp , insertOp,  updateOp, deleteOp);
 					}
 				}
 				
