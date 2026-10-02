@@ -13,11 +13,11 @@ public class DeleteOperation {
 			switch(table) {
 			case "address" -> deleteAddress(con);
 			
-			/*case "film" -> deleteCountry(con);
+			//case "store" -> deleteStore(con);
 			
-			case "category" -> insertCategory(con);
+			case "category" -> deleteCategory(con);
 					
-			case "staff" -> insertStaff(con);*/
+			//case "inventory" -> deleteInventory(con);
 			
 			default -> System.out.println("Neatbalstita tabula: "+table);
 			}
@@ -65,5 +65,27 @@ public class DeleteOperation {
 		        int addressRows = ps.executeUpdate();
 		        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no address tabulas.");
 		   }
+		}
+		   private void deleteCategory(Connection con) throws SQLException  {
+			   String category_id;
+			   
+			   do {
+					System.out.println("Ievadi kategorijas ID");
+					category_id = scan.nextLine();
+					}while(!category_id.matches("^\\d{1,}$"));
+			   
+			   String deleteFilmCategorySql = "DELETE FROM film_category WHERE category_id = ?";
+			    try (PreparedStatement ps = con.prepareStatement(deleteFilmCategorySql)) {
+			        ps.setString(1, category_id);
+			        int addressRows = ps.executeUpdate();
+			        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no film category tabulas.");
+			    }
+			   
+			   String deleteCategorySql = "DELETE FROM category WHERE category_id = ?";
+			    try (PreparedStatement ps = con.prepareStatement(deleteCategorySql)) {
+			        ps.setString(1, category_id);
+			        int addressRows = ps.executeUpdate();
+			        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no category tabulas.");
+			    }
 	}
 }

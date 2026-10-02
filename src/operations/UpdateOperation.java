@@ -15,11 +15,11 @@ public class UpdateOperation {
 			switch(table) {
 			case "address" -> updateAddress(con);
 
-			/*case "film" -> insertFilm(con);
+			//case "store" -> updateStore(con);
 			
-			case "category" -> insertCategory(con);
+			case "category" -> updateCategory(con);
 			
-			case "staff" -> insertStaff(con);*/
+			//case "inventory" -> updateInventory(con);
 			
 			default -> System.out.println("Neatbalstita tabula: "+table);
 			}
@@ -87,8 +87,35 @@ public class UpdateOperation {
 			ps.setString(8, last_update);
 			ps.setString(9, address_id);
 			int rows = ps.executeUpdate();
-			System.out.println("CITY tabula ir atjaunotas: "+rows+" rindas");
+			System.out.println("ADDRESS tabula ir atjaunotas: "+rows+" rindas");
 		}
-		
 	}
+
+		private void updateCategory(Connection con) throws SQLException{
+			String category_id;
+			String name;
+			LocalDateTime now = LocalDateTime.now();
+			String last_update;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
+			do {
+				System.out.println("Ievadi kategorijas ID");
+				category_id = scan.nextLine();
+				}while(!category_id.matches("^\\d{1,}$"));
+			
+			System.out.println("Ievadi nosaukumu kategorijai");
+			name = scan.nextLine();
+			 
+			last_update = now.format(formatter);
+			 
+			String sql = "UPDATE category SET name = ?, last_update = ? WHERE category_id = ?";
+			try(PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setString(1, name);
+				ps.setString(2, last_update);
+				ps.setString(3, category_id);
+				int rows = ps.executeUpdate();
+				System.out.println("category tabula ir atjaunotas: "+rows+" rindas");
+	
+		}
+		}
 }

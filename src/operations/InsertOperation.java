@@ -14,11 +14,11 @@ public class InsertOperation {
 				switch(table) {
 					case "address" -> insertAddress(con);
 					
-					/*case "film" -> insertFilm(con);
+					//case "store" -> insertStore(con);
 					
 					case "category" -> insertCategory(con);
 					
-					case "staff" -> insertStaff(con);*/
+					//case "inventory" -> insertInventory(con);
 					
 					default -> System.out.println("Neatbalstita tabula: "+table);
 				}
@@ -86,6 +86,33 @@ public class InsertOperation {
 				ps.setString(9, last_update);
 				int rows = ps.executeUpdate();
 				System.out.println("address tabula ir ievietotas: "+rows+" rindas");
+		}
+	}
+		
+		private void insertCategory(Connection con) throws SQLException{
+			String category_id;
+			String name;
+			LocalDateTime now = LocalDateTime.now();
+			String last_update;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
+			do {
+				System.out.println("Ievadi kategorijas ID");
+				category_id = scan.nextLine();
+				}while(!category_id.matches("^\\d{1,}$"));
+			
+			System.out.println("Ievadi nosaukumu kategorijai");
+			name = scan.nextLine();
+			 
+			last_update = now.format(formatter);
+			 
+			String sql = "INSERT INTO category (category_id, name, last_update) VALUES (?, ?, ?)";
+			try(PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setString(1, category_id);
+				ps.setString(2, name);
+				ps.setString(3, last_update);
+				int rows = ps.executeUpdate();
+				System.out.println("category tabula ir ievietotas: "+rows+" rindas");
 		}
 	}
 }

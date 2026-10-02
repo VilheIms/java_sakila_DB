@@ -53,18 +53,15 @@ public class SakilaDB {
 			String c = scan.nextLine().trim();
 			
 			switch(c) {
-			case "1": {
-				selectOp.select(con, table);
-			}
+			case "1" -> selectOp.select(con, table);
 			
-			case "2": insertOp.insert(con, table);
+			case "2" -> insertOp.insert(con, table);
 			
-			case "3":  updateOp.update(con, table);
+			case "3" ->  updateOp.update(con, table);
 			
-			case "4":  deleteOp.delete(con, table);
+			case "4" ->  deleteOp.delete(con, table);
 			
-			case "0":  back = true;
-			default: System.out.println();
+			case "0" ->  back = true;
 			}
 		}
 	}
