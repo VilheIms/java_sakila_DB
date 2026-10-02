@@ -17,7 +17,7 @@ public class DeleteOperation {
 			
 			case "category" -> deleteCategory(con);
 					
-			//case "inventory" -> deleteInventory(con);
+			case "inventory" -> deleteInventory(con);
 			
 			default -> System.out.println("Neatbalstita tabula: "+table);
 			}
@@ -100,6 +100,21 @@ public class DeleteOperation {
 			        ps.setString(1, language_id);
 			        int addressRows = ps.executeUpdate();
 			        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no language tabulas.");
+			    }
+		   }
+		   
+		   private void deleteInventory(Connection con) throws SQLException{
+			   String inventory_id;
+			   do {
+				   System.out.println("Ievadi inventara ID");
+				   inventory_id = scan.nextLine();
+				}while(!inventory_id.matches("^\\d{1,}$"));
+			   
+			   String deleteLanguageSql = "DELETE FROM inventory WHERE inventory_id = ?";
+			    try (PreparedStatement ps = con.prepareStatement(deleteLanguageSql)) {
+			        ps.setString(1, inventory_id);
+			        int addressRows = ps.executeUpdate();
+			        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no inventory tabulas.");
 			    }
 		   }
 }

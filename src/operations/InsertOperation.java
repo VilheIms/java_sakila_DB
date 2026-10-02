@@ -18,7 +18,7 @@ public class InsertOperation {
 					
 					case "category" -> insertCategory(con);
 					
-					//case "inventory" -> insertInventory(con);
+					case "inventory" -> insertInventory(con);
 					
 					default -> System.out.println("Neatbalstita tabula: "+table);
 				}
@@ -138,6 +138,39 @@ public class InsertOperation {
 				ps.setString(3, last_update);
 				int rows = ps.executeUpdate();
 				System.out.println("language tabula ir ievietotas: "+rows+" rindas");
+		}
+		}
+		private void insertInventory(Connection con) throws SQLException{
+			String inventory_id;
+			String film_id;
+			String store_id;
+			LocalDateTime now = LocalDateTime.now();
+			String last_update;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
+			do {
+				System.out.println("Ievadi inventara ID");
+				inventory_id = scan.nextLine();
+				}while(!inventory_id.matches("^\\d{1,}$"));
+			do {
+				System.out.println("Ievadi filmas ID");
+				film_id = scan.nextLine();
+				}while(!film_id.matches("^\\d{1,}$"));
+			do {
+				System.out.println("Ievadi veikala ID (pagaidam 1 vai 2)");
+				store_id = scan.nextLine();
+				}while(!store_id.matches("^\\d{1,}$"));
+			
+			last_update = now.format(formatter);
+			
+			String sql = "INSERT INTO inventory (inventory_id, film_id, store_id, last_update) VALUES (?, ?, ?, ?)";
+			try(PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setString(1, inventory_id);
+				ps.setString(2, film_id);
+				ps.setString(3, store_id);
+				ps.setString(4, last_update);
+				int rows = ps.executeUpdate();
+				System.out.println("inventory tabula ir ievietotas: "+rows+" rindas");
 		}
 		}
 }
