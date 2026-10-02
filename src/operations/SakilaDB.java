@@ -72,7 +72,6 @@ public class SakilaDB {
 			System.out.println("Izveidots savienojums ar datu bazi Sakila!");
 			
 			SelectOperation selectOp = new SelectOperation();
-			ViewManager viewManager = new ViewManager(con, selectOp, scan);
 			InsertOperation insertOp = new InsertOperation();
 			UpdateOperation updateOp = new UpdateOperation();
 			DeleteOperation deleteOp = new DeleteOperation();
@@ -82,7 +81,6 @@ public class SakilaDB {
 			while(running) {
 				System.out.println(CYAN + "\n----- SAKILA DB -----\n" + RESET
 						+ GREEN +  "1. Tabulas \n" 
-						+ "2. Skati\n" + RESET
 						+ RED + "0. Apturet\n" + RESET
 						+ CYAN + "Izvele:" + RESET);
 				
@@ -95,8 +93,6 @@ public class SakilaDB {
 						tableMenu(table, selectOp , insertOp,  updateOp, deleteOp);
 					}
 				}
-				
-				case "2" -> viewManager.showViewsMenu();
 				
 				
 				case "0" -> running = false;

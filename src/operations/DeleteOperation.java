@@ -110,8 +110,15 @@ public class DeleteOperation {
 				   inventory_id = scan.nextLine();
 				}while(!inventory_id.matches("^\\d{1,}$"));
 			   
-			   String deleteLanguageSql = "DELETE FROM inventory WHERE inventory_id = ?";
-			    try (PreparedStatement ps = con.prepareStatement(deleteLanguageSql)) {
+			   String deleteRentalSql = "DELETE FROM rental WHERE inventory_id = ?";
+			    try (PreparedStatement ps = con.prepareStatement(deleteRentalSql)) {
+			        ps.setString(1, inventory_id);
+			        int addressRows = ps.executeUpdate();
+			        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no rental tabulas.");
+			    }
+			   
+			   String deleteInventorySql = "DELETE FROM inventory WHERE inventory_id = ?";
+			    try (PreparedStatement ps = con.prepareStatement(deleteInventorySql)) {
 			        ps.setString(1, inventory_id);
 			        int addressRows = ps.executeUpdate();
 			        System.out.println("Dzesti " + addressRows + " saistitie ieraksti no inventory tabulas.");
