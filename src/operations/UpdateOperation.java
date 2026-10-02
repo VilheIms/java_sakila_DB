@@ -15,7 +15,7 @@ public class UpdateOperation {
 			switch(table) {
 			case "address" -> updateAddress(con);
 
-			//case "store" -> updateStore(con);
+			case "language" -> updateLanguage(con);
 			
 			case "category" -> updateCategory(con);
 			
@@ -115,6 +115,32 @@ public class UpdateOperation {
 				ps.setString(3, category_id);
 				int rows = ps.executeUpdate();
 				System.out.println("category tabula ir atjaunotas: "+rows+" rindas");
+	
+		}
+		}
+		private void updateLanguage(Connection con) throws SQLException{
+			String language_id;
+			String name;
+			LocalDateTime now = LocalDateTime.now();
+			String last_update;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
+			do {
+				System.out.println("Ievadi valodas ID");
+				language_id = scan.nextLine();
+				}while(!language_id.matches("^\\d{1,}$"));
+			System.out.println("Ievadi valodas nosaukumu"); 
+			name = scan.nextLine();
+			
+			last_update = now.format(formatter);
+			
+			String sql = "UPDATE language SET name = ?, last_update = ? WHERE language_id = ?";
+			try(PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setString(1, name);
+				ps.setString(2, last_update);
+				ps.setString(3, language_id);
+				int rows = ps.executeUpdate();
+				System.out.println("language tabula ir atjaunotas: "+rows+" rindas");
 	
 		}
 		}

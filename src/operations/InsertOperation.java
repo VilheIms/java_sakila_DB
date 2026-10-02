@@ -14,7 +14,7 @@ public class InsertOperation {
 				switch(table) {
 					case "address" -> insertAddress(con);
 					
-					//case "store" -> insertStore(con);
+					case "language" -> insertLanguage(con);
 					
 					case "category" -> insertCategory(con);
 					
@@ -115,5 +115,30 @@ public class InsertOperation {
 				System.out.println("category tabula ir ievietotas: "+rows+" rindas");
 		}
 	}
+		private void insertLanguage(Connection con) throws SQLException{
+			String language_id;
+			String name;
+			LocalDateTime now = LocalDateTime.now();
+			String last_update;
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
+			do {
+				System.out.println("Ievadi valodas ID");
+				language_id = scan.nextLine();
+				}while(!language_id.matches("^\\d{1,}$"));
+			System.out.println("Ievadi valodas nosaukumu"); 
+			name = scan.nextLine();
+			
+			last_update = now.format(formatter);
+			 
+			String sql = "INSERT INTO language (language_id, name, last_update) VALUES (?, ?, ?)";
+			try(PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setString(1, language_id);
+				ps.setString(2, name);
+				ps.setString(3, last_update);
+				int rows = ps.executeUpdate();
+				System.out.println("language tabula ir ievietotas: "+rows+" rindas");
+		}
+		}
 }
 

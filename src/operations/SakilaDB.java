@@ -19,18 +19,18 @@ public class SakilaDB {
 		while(true) {
 			System.out.println(CYAN + "\n--- TABULAS ---\n" + RESET
 					+ "1. Address\n"
-					+ "2. Film\n"
+					+ "2. Language\n"
 					+ "3. Category\n"
-					+ "4. Staff\n"
+					+ "4. Inventory\n"
 					+ "0. Atpakal\n"
 					+ "Izvelies tabulu: ");
 			String c = scan.nextLine().trim();
 			
 			return switch(c) {
 			case "1" -> "address";
-			case "2" -> "film";
+			case "2" -> "language";
 			case "3" -> "category";
-			case "4" -> "staff";
+			case "4" -> "inventory";
 			case "0" -> "exit";
 			default -> {
 				System.out.println("Nepareiza izvele.");
