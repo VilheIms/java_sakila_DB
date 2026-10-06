@@ -1,4 +1,4 @@
-# [h1] Java sakila database viewer
+# Java sakila database viewer
 
 This project has been created to view the "sakila" database using the eclipse terminal.
 
