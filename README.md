@@ -5,10 +5,10 @@ This project has been created to view the "sakila" database using the eclipse te
 Using this tool, you are able to INSERT, UPDATE, DELETE and VIEW table data, selecting from (currently) 4 different tables.
 
 Available tables:
-address
-language
-category
-inventory
+- address
+- language
+- category
+- inventory
 
 Information is printed out with colour, changing colour between rows.
 
